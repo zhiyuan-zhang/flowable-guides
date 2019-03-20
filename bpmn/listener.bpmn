@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.activiti.org/test">
+    <process id="listenerProcess" name="监听器测试" isExecutable="true">
+        <startEvent id="startevent1" name="Start"></startEvent>
+        <userTask id="userTask1" name="李建勋" activiti:assignee="user1">
+            <extensionElements>
+                <activiti:taskListener event="create" class="com.viathink.listener.TaskCreateListener">
+                    <activiti:field name="notifyType">
+                        <activiti:string>email</activiti:string>
+                    </activiti:field>
+                    <activiti:field name="task">
+                        <activiti:expression>${task}</activiti:expression>
+                    </activiti:field>
+                </activiti:taskListener>
+                <activiti:taskListener event="complete" class="com.viathink.listener.TaskCompleteListener">
+                    <activiti:field name="notifyType">
+                        <activiti:string>email</activiti:string>
+                    </activiti:field>
+                    <activiti:field name="task">
+                        <activiti:expression>${task}</activiti:expression>
+                    </activiti:field>
+                </activiti:taskListener>
+            </extensionElements>
+        </userTask>
+        <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="userTask1"></sequenceFlow>
+        <userTask id="groupTask" name="开发组" activiti:candidateGroups="develop"></userTask>
+        <endEvent id="endevent1" name="End"></endEvent>
+        <sequenceFlow id="flow2" sourceRef="userTask1" targetRef="groupTask"></sequenceFlow>
+        <sequenceFlow id="flow3" sourceRef="groupTask" targetRef="endevent1"></sequenceFlow>
+    </process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_myProcess">
+        <bpmndi:BPMNPlane bpmnElement="myProcess" id="BPMNPlane_myProcess">
+            <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+                <omgdc:Bounds height="35.0" width="35.0" x="40.0" y="200.0"></omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="userTask1" id="BPMNShape_userTask1">
+                <omgdc:Bounds height="55.0" width="105.0" x="130.0" y="190.0"></omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="groupTask" id="BPMNShape_groupTask">
+                <omgdc:Bounds height="55.0" width="105.0" x="340.0" y="190.0"></omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+                <omgdc:Bounds height="35.0" width="35.0" x="570.0" y="200.0"></omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+                <omgdi:waypoint x="75.0" y="217.0"></omgdi:waypoint>
+                <omgdi:waypoint x="130.0" y="217.0"></omgdi:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+                <omgdi:waypoint x="235.0" y="217.0"></omgdi:waypoint>
+                <omgdi:waypoint x="340.0" y="217.0"></omgdi:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+                <omgdi:waypoint x="445.0" y="217.0"></omgdi:waypoint>
+                <omgdi:waypoint x="570.0" y="217.0"></omgdi:waypoint>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>

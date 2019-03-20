@@ -1,9 +1,50 @@
 # flowable-guides
+
 本工程为 flowable 的一些简单示例，
+
+目前项目进度
+
+BPMN文件部署流程 ([ 完成 ])
+
+流方式部署流程 
+
+用户相关操作 ([ 完成 ])
+
+完成任务
+
+删除任务 ([ 完成 ])
+
+查询待处理任务 ([ 完成 ])
+
+任意节点跳转 ([ 完成 ])
+
+开始节点跳转 ([ 完成 ])
+
+驳回任务 
+
+委派
+
+审批意见支持
+
+并行、互斥网关
+
+事件监听
+
+审批历史
+
+通过流程变量查询历史流程实例
+
+会签
+
+撤回
+
+
+
+***
 
 flowable 分为两部分 
 一部分是 画流程(主要是BPMN2.0之类的流程图) 文件格式多是xml结尾或者bpmn2.0 结尾的
-剩下的是 调用接口来完成相对应的工作
+剩下的是 调用接口来[ 完成 ]相对应的工作
 
 所以在项目开始之前我们先要想清楚 
 
@@ -28,10 +69,10 @@ war包地址下载[https://www.flowable.org/]
 
 因为flowable自己有一套自己的idm权限那么绕过去 要么集成到自己项目中
 
-如果是绕过去到话那么参考这个文档
-[https://gitee.com/flowable-project/springboot-flowable-ui/blob/master/src/main/java/com/fxtcn/platform/filter/CustomHandlerInterceptor.java]
+如果是绕过去到话那么参考这个项目
+[git地址](https://gitee.com/flowable-project/springboot-flowable-ui/blob/master/src/main/java/com/fxtcn/platform/filter/CustomHandlerInterceptor.java)
 
-其中主要代码是在这里 
+其中主要代码是在这里 绕过了idm权限
 
 ```
 if (servletPath.startsWith("/app")) {
@@ -40,6 +81,39 @@ if (servletPath.startsWith("/app")) {
 			SecurityUtils.assumeUser(user);
 }
 ```
+如果是集成到自己项目中 
+参考
+[git地址](https://www.cnblogs.com/liuwenjun/p/10291210.html)
+
+流程图还有其他打开方式
+
+1.问 eclipse怎么画流程图
+
+答 下载bpmn插件 
+
+2.问 idea怎么画流程图
+
+答 下载bpmn插件 
+
+
+3.问 都不想用怎么画流程图 我们是前后端分离的怎么办
+
+答 去了解 bpmn.js 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
