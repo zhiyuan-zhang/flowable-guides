@@ -4,21 +4,21 @@
 
 目前项目进度
 
-BPMN文件部署流程 ([ 完成 ])
+BPMN文件部署流程 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/DeployProcess.java))
 
 流方式部署流程 
 
-用户相关操作 ([ 完成 ])
+用户相关操作 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/UserTest.java))
 
 完成任务
 
-删除任务 ([ 完成 ])
+删除任务 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/DeleteTaskTest.java))
 
-查询待处理任务 ([ 完成 ])
+查询待处理任务 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/TaskTest.java))
 
-任意节点跳转 ([ 完成 ])
+任意节点跳转 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/NodeJumpTest.java))
 
-开始节点跳转 ([ 完成 ])
+开始节点跳转 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/NodeJumpTest.java))
 
 驳回任务 
 
@@ -44,7 +44,7 @@ BPMN文件部署流程 ([ 完成 ])
 
 flowable 分为两部分 
 一部分是 画流程(主要是BPMN2.0之类的流程图) 文件格式多是xml结尾或者bpmn2.0 结尾的
-剩下的是 调用接口来[ 完成 ]相对应的工作
+剩下的是 调用接口来完成相对应的工作
 
 所以在项目开始之前我们先要想清楚 
 
