@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.flowable.org/processdef" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1553264324599" name="" targetNamespace="http://www.flowable.org/processdef" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="handlerProcess" isClosed="false" isExecutable="true" name="handlertest" processType="None">
+    <startEvent id="startEvent1"/>
+    <userTask activiti:exclusive="true" flowable:assignee="admin2" id="user0" name="admin2">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask activiti:exclusive="true" id="handler" name="handler">
+      <extensionElements>
+        <flowable:taskListener class="con.zw.flow.listener.TaskCreateListener" event="create"/>
+        <activiti:taskListener class="com.hki.flowable.handler.TaskCreateListener" event="create"/>
+      </extensionElements>
+    </userTask>
+    <endEvent id="sid-C71B8038-6454-4DB0-A4EF-C8CDC53D61D7"/>
+    <userTask activiti:exclusive="true" flowable:assignee="admin2" id="user999" name="admin2">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-F8251605-7DC5-48DE-9A08-7ACC13F3BBCA" sourceRef="handler" targetRef="user999"/>
+    <userTask activiti:exclusive="true" flowable:assignee="admin3" id="admin3" name="admin3">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-9C653255-5CA2-4A82-AC23-C1F058A314D8" sourceRef="user999" targetRef="admin3"/>
+    <sequenceFlow id="sid-3B504843-9F81-4FAC-9930-A6EA32AF7C20" sourceRef="admin3" targetRef="sid-C71B8038-6454-4DB0-A4EF-C8CDC53D61D7"/>
+    <sequenceFlow id="sid-25E351B0-3D66-4AC5-9E67-6DE74C7C4E18" sourceRef="startEvent1" targetRef="user0"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A"/>
+    <sequenceFlow id="sid-9E95DEE2-4B99-4417-BC42-A6025F816163" sourceRef="user0" targetRef="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A"/>
+    <sequenceFlow id="aaas" name="指派" sourceRef="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A" targetRef="handler">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isHelp == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="asds" name="不指派" sourceRef="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A" targetRef="user999">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isHelp == 0}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="handlerProcess">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="Shape-startEvent1">
+        <omgdc:Bounds height="32.0" width="32.0" x="100.0" y="163.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user0" id="Shape-user0">
+        <omgdc:Bounds height="80.0" width="100.0" x="120.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="handler" id="Shape-handler">
+        <omgdc:Bounds height="80.0" width="100.0" x="320.0" y="30.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-C71B8038-6454-4DB0-A4EF-C8CDC53D61D7" id="Shape-sid-C71B8038-6454-4DB0-A4EF-C8CDC53D61D7">
+        <omgdc:Bounds height="32.0" width="32.0" x="705.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user999" id="Shape-user999">
+        <omgdc:Bounds height="80.0" width="100.0" x="510.0" y="15.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="admin3" id="Shape-admin3">
+        <omgdc:Bounds height="80.0" width="100.0" x="655.0" y="15.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A" id="Shape-sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="270.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="asds" id="BPMNEdge_asds" sourceElement="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A" targetElement="user999">
+        <omgdi:waypoint x="302.0" y="196.0"/>
+        <omgdi:waypoint x="510.0" y="55.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-25E351B0-3D66-4AC5-9E67-6DE74C7C4E18" id="BPMNEdge_sid-25E351B0-3D66-4AC5-9E67-6DE74C7C4E18" sourceElement="startEvent1" targetElement="user0">
+        <omgdi:waypoint x="131.9687194226713" y="178.0"/>
+        <omgdi:waypoint x="170.0" y="178.0"/>
+        <omgdi:waypoint x="170.0" y="125.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9C653255-5CA2-4A82-AC23-C1F058A314D8" id="BPMNEdge_sid-9C653255-5CA2-4A82-AC23-C1F058A314D8" sourceElement="user999" targetElement="admin3">
+        <omgdi:waypoint x="610.0" y="55.0"/>
+        <omgdi:waypoint x="655.0" y="55.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3B504843-9F81-4FAC-9930-A6EA32AF7C20" id="BPMNEdge_sid-3B504843-9F81-4FAC-9930-A6EA32AF7C20" sourceElement="admin3" targetElement="sid-C71B8038-6454-4DB0-A4EF-C8CDC53D61D7">
+        <omgdi:waypoint x="721.0" y="95.0"/>
+        <omgdi:waypoint x="721.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9E95DEE2-4B99-4417-BC42-A6025F816163" id="BPMNEdge_sid-9E95DEE2-4B99-4417-BC42-A6025F816163" sourceElement="user0" targetElement="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A">
+        <omgdi:waypoint x="220.0" y="85.0"/>
+        <omgdi:waypoint x="245.0" y="85.0"/>
+        <omgdi:waypoint x="245.0" y="201.0"/>
+        <omgdi:waypoint x="270.0" y="196.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F8251605-7DC5-48DE-9A08-7ACC13F3BBCA" id="BPMNEdge_sid-F8251605-7DC5-48DE-9A08-7ACC13F3BBCA" sourceElement="handler" targetElement="user999">
+        <omgdi:waypoint x="420.0" y="70.0"/>
+        <omgdi:waypoint x="465.0" y="70.0"/>
+        <omgdi:waypoint x="465.0" y="55.0"/>
+        <omgdi:waypoint x="510.0" y="70.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="aaas" id="BPMNEdge_aaas" sourceElement="sid-D373E5A3-9AD4-47F5-BCB7-F31853C3CC8A" targetElement="handler">
+        <omgdi:waypoint x="302.0" y="196.0"/>
+        <omgdi:waypoint x="320.0" y="70.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

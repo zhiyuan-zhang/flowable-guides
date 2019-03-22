@@ -13,7 +13,9 @@ import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -55,12 +57,27 @@ public class TaskTest {
         for(Task task: taskList) {
             System.out.println("id: " + task.getId());
             System.out.println("name: " + task.getName());
-            System.out.println("crateTime: " + task.getCreateTime());
             System.out.println("assignee: " + task.getAssignee());
             // 获取跟随流程的表单
             HistoryService historyService = processEngine.getHistoryService();
             HistoricVariableInstance sheetId = historyService.createHistoricVariableInstanceQuery().processInstanceId(task.getProcessInstanceId()).variableName("sheetId").singleResult();
 
         }
+    }
+//    办理任务
+    @Test
+    public void completeTask() {
+        String taskId = "32502";
+        TaskService taskService = processEngine.getTaskService();
+//      对于执行完的任务，activiti将从act_ru_task表中删除该任务，下一个任务会被插入进来
+
+//      带参数 签收
+        Map<String, Object> variableMap = new HashMap<String, Object>();
+        variableMap.put("isHelp", "0");
+        variableMap.put("user", "admin4");
+        taskService.complete(taskId,variableMap);
+//      不带参数
+        taskService.complete(taskId);
+        // 执行完后任务将被派发给下一审批人员或组
     }
 }

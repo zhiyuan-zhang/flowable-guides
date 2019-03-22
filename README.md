@@ -10,7 +10,7 @@ BPMN文件部署流程 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-gui
 
 用户相关操作 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/UserTest.java))
 
-完成任务
+完成任务([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/TaskTest.java))
 
 删除任务 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/DeleteTaskTest.java))
 
@@ -20,23 +20,21 @@ BPMN文件部署流程 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-gui
 
 开始节点跳转 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/NodeJumpTest.java))
 
-驳回任务 
+驳回任务 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/DeleteTaskTest.java))
+
+互斥网关 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/HandlerTest.java))
+
+事件监听 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/HandlerTest.java))
+
+审批历史  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/HistoryTest.java))
+
+会签 
+
+撤回
 
 委派
 
 审批意见支持
-
-并行、互斥网关
-
-事件监听
-
-审批历史
-
-通过流程变量查询历史流程实例
-
-会签
-
-撤回
 
 
 
@@ -95,7 +93,6 @@ if (servletPath.startsWith("/app")) {
 
 答 下载bpmn插件 
 
-
 3.问 都不想用怎么画流程图 我们是前后端分离的怎么办
 
 答 去了解 bpmn.js 
@@ -108,6 +105,9 @@ if (servletPath.startsWith("/app")) {
 
 答 目前还没计划要出
 
+6. 我画好图后 不想用文件部署还有其他办法么
+
+答 很多种方式 1 后台找到bpmn.xml文件传入参数部署,2 用文件流的形式model部署
 
 
 

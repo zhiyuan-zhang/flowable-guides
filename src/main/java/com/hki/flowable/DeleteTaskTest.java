@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @Auther: ZHANG.HAO
  * @Date: 2019-03-20 23:23
- * @Description:
+ * @Description:  驳回任务分为驳回到 申请人 和驳回到上一级 当前测试类是驳回至申请人
  */
 public class DeleteTaskTest {
 
@@ -81,6 +81,7 @@ public class DeleteTaskTest {
         variableMap.put("username", sheetName);
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("listenerProcess", variableMap);
 
+        // 驳回其实也就是删除当前任务  然后消息通知对方 如果觉得做的简单也可以加个邮件通知节点,
         runtimeService.deleteProcessInstance(processInstance.getId(),"流程驳回");
 
         //查询这个流程任务

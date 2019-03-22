@@ -41,16 +41,22 @@ public class UserTest {
         }
 
     public void addSysUser(IdentityService identityService) {
+            //创建组
+        Group developGroup = processEngine.getIdentityService().newGroup("manager");
+        developGroup.setName("系统管理组");
+        developGroup.setType("assignee");
+        identityService.saveGroup(developGroup);
         for (int i = 0 ;i < 10; i++){
             // 创建用户
-            User user3 = identityService.newUser("user"+ i);
-            user3.setFirstName("user"+ i);
+            User user3 = identityService.newUser("admin"+ i);
+            user3.setFirstName("admin"+ i);
             user3.setLastName("");
-            user3.setEmail("user@abcd.com");
+            user3.setEmail("admin@abcd.com");
             identityService.saveUser(user3);
             // 用户加入组
+
             identityService.createMembership("user"+ i, "manager");
-            User user = identityService.createUserQuery().userId("user" + i).singleResult();
+            User user = identityService.createUserQuery().userId("admin" + i).singleResult();
 
             System.out.println("id: " + user.getId());
         }
