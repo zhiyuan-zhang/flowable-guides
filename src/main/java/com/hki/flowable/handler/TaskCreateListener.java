@@ -22,7 +22,10 @@ public class TaskCreateListener implements TaskListener, Serializable {
 //            System.out.printf("TaskCreate execution id: %s \n", delegateTask.getExecutionId());
 //            System.out.printf("TaskCreate event name: %s, 审批人：%s \n", delegateTask.getEventName(), delegateTask.getAssignee());
 //            System.out.println("---------------TaskCreateListener----------------");
-            delegateTask.setAssignee("admin5");
+            Object key = delegateTask.getVariable("key");
+            if (null != key)
+                delegateTask.setAssignee(key.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

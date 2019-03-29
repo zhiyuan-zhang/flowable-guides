@@ -34,9 +34,11 @@ BPMN文件部署流程 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-gui
 
 委派
 
-审批意见支持
+审批意见支持  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/TaskTest.java))
 
+获取fromkey参数 
 
+获取流程附带参数
 
 ***
 

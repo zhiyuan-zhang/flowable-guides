@@ -17,10 +17,11 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * @Auther: ZHANG.HAO
- * @Date: 2019-03-20 23:23
- * @Description:  驳回任务分为驳回到 申请人 和驳回到上一级 当前测试类是驳回至申请人
+ * @Date: 2019-03-29 11:04
+ * @Description:
  */
-public class DeleteTaskTest {
+public class ArgTest {
+
 
     TaskService taskService;
 
@@ -43,49 +44,28 @@ public class DeleteTaskTest {
 
 
     @Test
-    public void testdeletebyTaskId(){
+    public void deploy(){
         // 模拟会员申请 表单 定义一个流程单据id，流程单据name
-        String sheetId = "54321";
-        String sheetName = "lisi";
         Map<String, Object> variableMap = new HashMap<String, Object>();
-        variableMap.put("userid", sheetId);
-        variableMap.put("username", sheetName);
+        variableMap.put("userid", "123");
+        variableMap.put("username", "zhangsan");
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("listenerProcess", variableMap);
         //查询这个流程任务
         Task task= taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
 
+        Map<String, Object> processVariables = processInstance.getProcessVariables();
 
-        Task updatedTask = taskService.createTaskQuery().taskId(task.getId()).singleResult();
-        runtimeService.deleteProcessInstance(updatedTask.getProcessInstanceId(),"流程驳回");
-
-        //查询这个流程任务
-        Task task1= taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
-
-        assertEquals(null,task1);
 
     }
 
     @Test
-    public void testdeletebyProcessInstanceId(){
+    public void deployWithBusinessKey(){
         // 模拟会员申请 表单 定义一个流程单据id，流程单据name
-        String sheetId = "54321";
-        String sheetName = "lisi";
-        // 如果多个key相同的流程定义，会启动version最高的流程
-        // 操作数据库的act_ru_execution表,如果是用户任务节点，同时也会在act_ru_task添加一条记录
-        // 设置流程变量的时候，会向act_ru_variable表添加数据
-        Map<String, Object> variableMap = new HashMap<String, Object>();
-        variableMap.put("userid", sheetId);
-        variableMap.put("username", sheetName);
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("listenerProcess", variableMap);
-
-        // 驳回其实也就是删除当前任务  然后消息通知对方 如果觉得做的简单也可以加个邮件通知节点,
-        runtimeService.deleteProcessInstance(processInstance.getId(),"流程驳回");
-
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("listenerProcess", "businessKey");
         //查询这个流程任务
         Task task= taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
-
-        assertEquals(null,task);
-
+        String businessKey = runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult().getBusinessKey();
+        assertEquals("businessKey",businessKey);
     }
 
 }

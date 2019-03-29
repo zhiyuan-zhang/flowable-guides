@@ -8,7 +8,10 @@ import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.idm.api.Group;
 import org.flowable.idm.api.User;
+
+import org.flowable.engine.task.Comment;
 import org.flowable.task.api.Task;
+import org.flowable.task.api.TaskQuery;
 import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +67,15 @@ public class TaskTest {
 
         }
     }
-//    办理任务
+    /**
+     *
+     * 功能描述: 办理任务
+     *
+     * @param:
+     * @return:
+     * @auther: ZHANG.HAO
+     * @date: 2019-03-29 11:01
+     */
     @Test
     public void completeTask() {
         String taskId = "32502";
@@ -80,4 +91,37 @@ public class TaskTest {
         taskService.complete(taskId);
         // 执行完后任务将被派发给下一审批人员或组
     }
+
+    /**
+     *
+     * 功能描述: 完成任务并附带审批意见 以及查询审批意见
+     *
+     * @param:
+     * @return:
+     * @auther: ZHANG.HAO
+     * @date: 2019-03-29 10:58
+     */
+    @Test
+    public void completeTaskWithComment() {
+        String taskId = "32502";
+        TaskService taskService = processEngine.getTaskService();
+
+        Task task = taskService.createTaskQuery()
+                .orderByTaskId()
+                .taskId(taskId)
+                .singleResult();
+
+        taskService.addComment(taskId, task.getProcessInstanceId(), "同意，审批通过");
+        taskService.complete(taskId);
+
+        // 查找流程实例的审批意见 #247
+        List<Comment> taskComments = taskService.getProcessInstanceComments(task.getProcessInstanceId());
+        for(Comment comment: taskComments) {
+            System.out.printf("任务: %s, 审批人：%s， 审批意见: %s", comment.getTaskId(), comment.getUserId(), comment.getFullMessage());
+        }
+        // 执行完后任务将被派发给下一审批人员或组
+    }
+
+
+
 }

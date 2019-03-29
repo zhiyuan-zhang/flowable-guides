@@ -111,7 +111,7 @@ public class HandlerTest {
         TaskService taskService = processEngine.getTaskService();
         Map<String, Object> variableMap = new HashMap<String, Object>();
         variableMap.put("isHelp", "0");
-        variableMap.put("user", "admin5");
+        variableMap.put("key", "admin5");
         taskService.complete(taskId,variableMap);
     }
 }
