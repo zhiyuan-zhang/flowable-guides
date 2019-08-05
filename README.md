@@ -6,7 +6,7 @@
 
 BPMN文件部署流程 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/DeployProcess.java))
 
-流方式部署流程 
+流方式部署流程  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/DeployProcess.java))
 
 用户相关操作 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/UserTest.java))
 

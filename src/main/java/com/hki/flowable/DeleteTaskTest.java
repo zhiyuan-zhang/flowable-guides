@@ -1,14 +1,16 @@
 package com.hki.flowable;
 
-import org.flowable.engine.ProcessEngine;
-import org.flowable.engine.ProcessEngineConfiguration;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.engine.*;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ObjectUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +22,14 @@ import static org.junit.Assert.assertEquals;
  * @Date: 2019-03-20 23:23
  * @Description:  驳回任务分为驳回到 申请人 和驳回到上一级 当前测试类是驳回至申请人
  */
+
 public class DeleteTaskTest {
 
     TaskService taskService;
 
     RuntimeService runtimeService;
+
+    HistoryService historyService;
 
     private ProcessEngine processEngine = null;
     // 初始化流程引擎
@@ -39,6 +44,7 @@ public class DeleteTaskTest {
         processEngine = cfg.buildProcessEngine();
         runtimeService = processEngine.getRuntimeService();
         taskService = processEngine.getTaskService();
+        historyService = processEngine.getHistoryService();
     }
 
 
@@ -54,9 +60,17 @@ public class DeleteTaskTest {
         //查询这个流程任务
         Task task= taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
 
-
         Task updatedTask = taskService.createTaskQuery().taskId(task.getId()).singleResult();
-        runtimeService.deleteProcessInstance(updatedTask.getProcessInstanceId(),"流程驳回");
+
+        if(ObjectUtils.isEmpty(updatedTask)){
+            System.out.println("任务没找到  ");
+        }else{
+            runtimeService.suspendProcessInstanceById(updatedTask.getProcessInstanceId());
+            runtimeService.deleteProcessInstance(updatedTask.getProcessInstanceId(),"流程驳回");
+            historyService.deleteHistoricProcessInstance(updatedTask.getProcessInstanceId());
+            System.out.println("任务被驳回  "+updatedTask.getProcessInstanceId());
+            assertEquals(true,task);
+        }
 
         //查询这个流程任务
         Task task1= taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
@@ -87,5 +101,6 @@ public class DeleteTaskTest {
         assertEquals(null,task);
 
     }
+
 
 }
