@@ -15,7 +15,10 @@ import org.flowable.task.api.TaskQuery;
 import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,5 +126,21 @@ public class TaskTest {
     }
 
 
+    /**
+     * 批量转交任务
+     * @param taskId  转交的任务
+     * @param assignee 转交人
+     * @return
+     */
+    public void turnTask(String [] taskId,String assignee) {
 
-}
+        List<String> taskList = Arrays.asList(taskId);
+
+        taskList.stream().parallel().forEach(taskid -> {
+            taskService.setAssignee(taskid, assignee);
+
+        });
+    }
+
+
+    }

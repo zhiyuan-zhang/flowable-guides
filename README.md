@@ -28,17 +28,22 @@ BPMN文件部署流程 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-gui
 
 审批历史  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/HistoryTest.java))
 
-会签 
+根据BusinessKey查询组待处理任务 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/GroupTaskTest.java))
 
-撤回
-
-委派
+带条件模糊查询获取多个用户的多个流程的组待审批任务 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/GroupTaskTest.java))
 
 审批意见支持  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/TaskTest.java))
 
 获取fromkey参数  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/ArgTest.java))
 
 获取流程附带参数  ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/ArgTest.java))
+
+会签 
+
+撤回
+
+委派和转交 ([ 完成 ](https://github.com/zhiyuan-zhang/flowable-guides/blob/master/src/main/java/com/hki/flowable/TaskTest.java))
+
 
 ***
 
