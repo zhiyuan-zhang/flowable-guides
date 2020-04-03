@@ -80,11 +80,28 @@ public class GroupTaskTest {
 
     }
 
-
-
     /**
-     * 带条件模糊查询获取多个用户的多个流程的组待审批任务
+     * 批量签收组任务
+     * @param taskId
+     * @param assignee
+     * @return
      */
+    @Test
+    public void claimCount(String [] taskId,String assignee) {
+
+        List<String> taskList = Arrays.asList(taskId);
+
+        taskList.stream().parallel().forEach(taskid -> {
+            taskService.claim(taskid, assignee);
+
+        });
+
+    }
+
+
+        /**
+         * 带条件模糊查询获取多个用户的多个流程的组待审批任务
+         */
     public void usersApprove() {
 
         String [] definitionKeys = {"work"};
